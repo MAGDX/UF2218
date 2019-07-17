@@ -1,6 +1,6 @@
 <%@include file="../includes/header.jsp"%>
 <%@include file="../includes/navbar.jsp"%>
-<h1>Crear Video de YT</h1>
+<h2 class="mt-2">Crear Video de YT</h2>
 
 <form action="youtube/crearVideo" method="get">
 	<label class="obligatorio" for="titulo">Título</label>

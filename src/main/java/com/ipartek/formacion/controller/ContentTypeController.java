@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+
 /**
  * Servlet implementation class ContentTypeController
  */
@@ -54,6 +57,9 @@ public class ContentTypeController extends HttpServlet {
 		case "4":
 			response.setContentType("application/pdf");
 			response.setCharacterEncoding("UTF-8");
+			PDDocument document = new PDDocument();
+			
+			document.close();
 			responseContent = "Perro: Buba Raza: Boxer";
 			break;
 		default:
