@@ -2,6 +2,7 @@ package com.ipartek.formacion.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.ListIterator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class NombresController
  */
-@WebServlet("nombres")
+@WebServlet("/nombres")
 public class NombresController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static ArrayList<String> nombres;
@@ -22,7 +23,7 @@ public class NombresController extends HttpServlet {
 		nombres.add("Manolo");
 		nombres.add("Pepito");
 		nombres.add("Ursiciano");
-		nombres.add("Agapito");		
+		nombres.add("Agapito");
 	}
 
 	/**
@@ -30,10 +31,19 @@ public class NombresController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String buscar = request.getParameter("buscar");
-		
-		request.setAttribute("mensaje", "TODO_mensaje");
 		request.setAttribute("buscar", buscar);
-		request.setAttribute("nombres", nombres);
+		
+		
+		
+		if(nombres.indexOf(buscar)!=-1) {
+			request.setAttribute("nombres", nombres.subList(nombres.indexOf(buscar),nombres.indexOf(buscar)+1));
+			request.setAttribute("mensaje", "Nombre encontrado");
+		}else{
+			request.setAttribute("nombres", nombres);
+			if(buscar!=null) {
+				request.setAttribute("mensaje", "Nombre no encontrado");
+			}
+		}
 		
 		request.getRequestDispatcher("ejemplos/nombres.jsp").forward(request, response);
 	}
@@ -41,7 +51,12 @@ public class NombresController extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+		nombres.add(request.getParameter("nombre"));
+		
+		request.setAttribute("mensaje", "Nombre añadido");
+		request.setAttribute("nombres", nombres);
+		
+		request.getRequestDispatcher("ejemplos/nombres.jsp").forward(request, response);
 	}
 }
