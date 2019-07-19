@@ -2,6 +2,7 @@
 <%@include file="includes/navbar.jsp"%>
 
 <h1>Hello Java Web App 3.1</h1>
+<hr>
 
 <ul class="list-group">
 	<li class="list-group-item"><a href="ejemplos/basico.jsp">Ejemplo Servlet Básico sin JSP</a></li>

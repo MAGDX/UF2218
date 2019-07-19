@@ -67,7 +67,7 @@ public class VideoDAO {
 		return video;
 	}
 	
-	private boolean crear(Video pojo) {
+	public boolean crear(Video pojo) {
 		boolean resultado = false;
 		String sql = "INSERT INTO `video` (`nombre`, `codigo`) VALUES (?,?);";
 
@@ -76,8 +76,7 @@ public class VideoDAO {
 
 			pst.setString(1, pojo.getNombre());
 			pst.setString(2, pojo.getCodigo());
-
-			resultado = doSave(pst, pojo);
+			pst.executeUpdate();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -86,7 +85,7 @@ public class VideoDAO {
 		return resultado;
 	}
 	
-	private boolean modificar(Video pojo) {
+	public boolean modificar(Video pojo) {
 		boolean resultado = false;
 
 		String sql = "UPDATE `video` SET `nombre`= ?, `codigo`= ? WHERE `id`= ?;";
@@ -97,9 +96,8 @@ public class VideoDAO {
 			pst.setString(1, pojo.getNombre());
 			pst.setString(2, pojo.getCodigo());
 			pst.setInt(3, pojo.getId());
-
-			resultado = doSave(pst, pojo);
-
+			pst.executeUpdate();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -112,7 +110,7 @@ public class VideoDAO {
 
 		try (Connection con = ConnectionManager.getConnection();
 				PreparedStatement pst = con.prepareStatement(sql);) {
-
+			
 			pst.setInt(1, id);
 
 			int affetedRows = pst.executeUpdate();
@@ -126,7 +124,7 @@ public class VideoDAO {
 
 		return resultado;
 	}
-	
+/*
 	private boolean doSave(PreparedStatement pst, Video pojo){
 		boolean resultado = false;
 
@@ -146,7 +144,7 @@ public class VideoDAO {
 
 		return resultado;
 	}
-/*
+	
 	public ArrayList<Rol> getByName(String search) {
 
 		ArrayList<Rol> lista = new ArrayList<Rol>();

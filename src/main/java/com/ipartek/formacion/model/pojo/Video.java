@@ -19,12 +19,19 @@ public class Video {
 		this.id = -1;
 		this.nombre = "";
 		this.codigo = "";
+		this.reproducciones = 0;
 	}
 	
+	public Video(int id, String codigo, String nombre) throws Exception {
+		super();
+		this.setId(id);
+		this.setCodigo(codigo);
+		this.setNombre(nombre);
+	}
+
 	public Video(String codigo, String nombre) throws Exception {
 		this.setCodigo(codigo);
 		this.setNombre(nombre);
-		this.reproducciones = 0;
 	}
 	
 	// Getters y Setters
