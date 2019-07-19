@@ -13,13 +13,13 @@
 					class="sr-only">(current)</span></a></li>
 			<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
 			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="youtube/index.jsp" id="navbarDropdown"
+				<a class="nav-link dropdown-toggle" href="videos?op=1" id="navbarDropdown"
 				role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					Youtube
 				</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="youtube/index.jsp">Listado</a>
-					<a class="dropdown-item" href="youtube/formulario.jsp">Crear Video</a>
+					<a class="dropdown-item" href="videos?op=1">Listado</a>
+					<a class="dropdown-item" href="videos?op=2">Crear Video</a>
 				</div>
 			</li>
 			<li class="nav-item"><a class="nav-link disabled" href="#"
