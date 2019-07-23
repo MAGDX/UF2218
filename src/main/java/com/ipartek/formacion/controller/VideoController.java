@@ -1,20 +1,25 @@
 package com.ipartek.formacion.controller;
 
 import java.io.IOException;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
 
+import com.ipartek.formacion.controller.pojo.Alert;
 import com.ipartek.formacion.model.dao.VideoDAO;
 import com.ipartek.formacion.model.pojo.Video;
 
 /**
  * Servlet implementation class VideoController
  */
-@WebServlet("/videos")
+@WebServlet("/backoffice/videos")
 public class VideoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String VIEW_INDEX = "youtube/index.jsp";
@@ -27,10 +32,13 @@ public class VideoController extends HttpServlet {
 	private static VideoDAO videoDAO;
 	private static String view;
 
+	private static Validator validator;
+
 	@Override
 	public void init() throws ServletException {
 		super.init();
 		videoDAO = VideoDAO.getInstance();
+		validator = Validation.buildDefaultValidatorFactory().getValidator();
 	}
 
 	/**
@@ -105,27 +113,45 @@ public class VideoController extends HttpServlet {
 		view = VIEW_FORM;
 	}
 
-	private static void crearModificarVideo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int id = Integer.parseInt(request.getParameter("id"));
-		String nombre = request.getParameter("nombre");
-		String codigo = request.getParameter("codigo");
-
+	private static void crearModificarVideo(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		try {
-			if (id == -1) {
-				videoDAO.crear(new Video(codigo, nombre));
+			Video v = new Video(Integer.parseInt(request.getParameter("id")), request.getParameter("codigo"),
+					request.getParameter("nombre"));
+
+			Set<ConstraintViolation<Video>> violations = validator.validate(v);
+			
+			// Comprobamos si hay violaciones de las validaciones
+			if (violations.isEmpty()) {
+				if (v.getId() == -1) {
+					videoDAO.crear(v);
+				} else {
+					videoDAO.modificar(v);
+				}
+				request.setAttribute("mensaje", new Alert("success", "Registro creado con exito!"));
 			} else {
-				videoDAO.modificar(new Video(id, codigo, nombre));
+				String mensaje = "";
+				
+				for (ConstraintViolation<Video> violation : violations) {
+					mensaje += violation.getPropertyPath() +": " + violation.getMessage() +"<br>";
+				}
+				request.setAttribute("mensaje", new Alert("warning", mensaje));
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			request.setAttribute("mensaje", new Alert("danger", "El codigo insertado ya existe."));
 		}
-		
 		listar(request, response);
 	}
 
 	private static void eliminarVideo(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		videoDAO.delete(Integer.parseInt(request.getParameter("id")));
+
+		if (videoDAO.delete(Integer.parseInt(request.getParameter("id")))) {
+			request.setAttribute("mensaje", new Alert("success", "Registro eliminado con exito!"));
+		} else {
+			request.setAttribute("mensaje",
+					new Alert("danger", "No se puedo eliminar el registro. Vuelva a intentarlo más tarde..."));
+		}
 
 		listar(request, response);
 	}

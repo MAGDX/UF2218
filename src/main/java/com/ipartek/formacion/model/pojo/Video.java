@@ -1,5 +1,8 @@
 package com.ipartek.formacion.model.pojo;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Video {
 
 	// Constantes
@@ -10,7 +13,11 @@ public class Video {
 
 	// Atributos
 	private int id; //id de la BBDD
+	@NotNull
+	@Size(min=11,max=11, message="Exactamente debe de ser 11")
 	private String codigo; // exactamente 11
+	@NotNull
+	@Size(min=2,max=150, message="El tamaño debe comprender entre 2 y 150 caracteres.")
 	private String nombre; // min 2 letras max 150
 	private int reproducciones;
 

@@ -66,7 +66,7 @@ public class VideoDAO {
 		return video;
 	}
 
-	public boolean crear(Video pojo) {
+	public boolean crear(Video pojo) throws SQLException {
 		boolean resultado = false;
 		String sql = "INSERT INTO `video` (`nombre`, `codigo`) VALUES (?,?);";
 
@@ -78,8 +78,6 @@ public class VideoDAO {
 			if (pst.executeUpdate() == 1) {
 				resultado = true;
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 
 		return resultado;
