@@ -5,6 +5,7 @@
          version="3.1">
          
          <session-config>
+         	<!-- Establece el tiempo de inactividad antes de que la sesion se caduque en (5) minutos -->
          	<session-timeout>5</session-timeout>
          </session-config>
          

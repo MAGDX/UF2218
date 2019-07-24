@@ -7,6 +7,12 @@
 <h1>BackOffice</h1>
 <hr>
 
-<%=LogedUsersListener.nombre%>
+<h4>Usuarios Conectados</h4>
+<ul>
+	<c:forEach items="${LogedUsersListener.logedUsers}" var="u">
+		<li class="list-group-item">${u}</li>
+	</c:forEach>
+</ul>
+
 <%@include file="../includes/alert.jsp"%>
 <%@include file="../includes/footer.jsp"%>

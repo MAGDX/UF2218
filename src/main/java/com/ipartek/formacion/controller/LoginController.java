@@ -38,8 +38,9 @@ public class LoginController extends HttpServlet {
 
 		if ("admin".equalsIgnoreCase(user.toLowerCase()) && "admin".equalsIgnoreCase(pass.toLowerCase())) {
 			HttpSession sesion = request.getSession();
+			//sesion.setMaxInactiveInterval(X); Cambia el tiempo de sesion de inactividad antes de caducarse a X segundos
 			
-			sesion.setAttribute("user", "user"+request.getLocalAddr());
+			sesion.setAttribute("user", "user"+request.getRemoteAddr());
 			
 			request.setAttribute("mensaje", new Alert("success", "Sesión iniciada con exito!"));
 			String callback = (String) sesion.getAttribute("callback");
