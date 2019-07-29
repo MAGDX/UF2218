@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class IdiomaController
@@ -23,16 +24,27 @@ public class IdiomaController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String idiomaSeleccionado = request.getParameter("idiomaSeleccionado");
 		
+		String ruta = request.getParameter("ruta");
+		ruta = ruta.split("uf2218/")[1];
+		
 		if(idiomaSeleccionado == null) {
-			//TODO comprobar null
+			idiomaSeleccionado = "eu_ES";
 		}
 		
-		Locale locale = new Locale("eu_ES");
+		Locale locale = new Locale(idiomaSeleccionado.split("_")[0], idiomaSeleccionado.split("_")[1]);
 		ResourceBundle properties = ResourceBundle.getBundle("i18n/i18nmessages", locale);
 		
 		request.setAttribute("mensajeIdioma", properties.getString("menu.inicio"));
 		
-		request.getRequestDispatcher("ejemplos/i18n.jsp");
+		// Guardamos el idioma seleccionado en la sesion
+		HttpSession sesion = request.getSession();
+		sesion.setAttribute("language", idiomaSeleccionado);
+		
+		if ( ruta != null ) {
+			request.getRequestDispatcher(ruta).forward(request, response);
+		}else {
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
 	}
 
 	/**

@@ -10,13 +10,13 @@
 
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
-			<li class="nav-item active"><a class="nav-link" href="index.jsp">Inicio<span
+			<li class="nav-item active"><a class="nav-link" href="index.jsp"><fmt:message key="menu.inicio"/><span
 					class="sr-only">(current)</span></a></li>
 			<li class="nav-item active"><a class="nav-link" href="${(user==null)?'login.jsp':'logout'}">${(user==null)?'Login':'Logout'}</a></li>
 			<li class="nav-item active dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 				role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					Utilidades
+					<fmt:message key="menu.utilidades"/>
 				</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 					<a class="dropdown-item" href="calculadora/calculator.jsp">Calculadora</a>
@@ -53,11 +53,11 @@
 				tabindex="-1" aria-disabled="true">BackOffice</a>
 			</li>
 		</ul>
-		<form class="form-inline my-2 my-lg-0">
-			<input class="form-control mr-sm-2" type="search"
-				placeholder="Buscar..." aria-label="Search">
-			<button class="btn btn-primary my-2 my-sm-0" type="submit">Buscar</button>
-		</form>
+		<div class="d-inline my-2 my-lg-0">
+			<a href="i18n?idiomaSeleccionado=es_ES&ruta=${pageContext.request.requestURI}"><img class="ml-2 ${sessionScope.idiomaSeleccionado != 'es_ES' ? 'inactive': ''  }" src="resources/images/españa.jpg" alt="Castellano"></a>
+			<a href="i18n?idiomaSeleccionado=en_EN&ruta=${pageContext.request.requestURI}"><img class="ml-2 ${sessionScope.idiomaSeleccionado != 'en_EN' ? 'inactive': ''  }" src="resources/images/england.jpg" alt="Inglés"></a>
+			<a href="i18n?idiomaSeleccionado=eu_ES&ruta=${pageContext.request.requestURI}"><img class="ml-2 ${sessionScope.idiomaSeleccionado != 'eu_ES' ? 'inactive': ''  }" src="resources/images/ikurrina.jpg" alt="Euskera"></a>
+		</div>
 	</div>
 </nav> <!-- End NavBar -->
 <main class="container text-primary">

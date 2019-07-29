@@ -10,6 +10,6 @@
 	<input type="password" name="pass" placeholder="Contraseña">
 	<br>
 	<br>
-	<button type="submit" class="btn btn-primary">Iniciar Sesion</button>
+	<button type="submit" class="btn btn-primary">Iniciar Sesión</button>
 </form>
 <%@include file="../includes/footer.jsp"%>
