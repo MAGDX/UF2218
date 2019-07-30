@@ -9,7 +9,7 @@
 <ul class="list-group">
 	<%
 		ArrayList<Video> videos = (ArrayList<Video>) request.getAttribute("videos");
-		for (Video video : videos) {
+			for (Video video : videos) {
 	%>
 		<li class="list-group-item">
 			<a href="backoffice/videos?op=3&id=<%=video.getId()%>"><%=video.getNombre()%></a>
