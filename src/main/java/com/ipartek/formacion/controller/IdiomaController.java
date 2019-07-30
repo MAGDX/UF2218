@@ -19,38 +19,44 @@ public class IdiomaController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String idiomaSeleccionado = request.getParameter("idiomaSeleccionado");
-		
+
 		String ruta = request.getParameter("ruta");
-		ruta = ruta.split("uf2218/")[1];
+		//ruta = ruta.split("UF2218/")[1]; TODO que la ruta me devuelva a la pagina en la clicke en la bandera
 		
-		if(idiomaSeleccionado == null) {
+		ruta = "index.jsp";
+		
+		if (idiomaSeleccionado == null) {
 			idiomaSeleccionado = "eu_ES";
 		}
-		
+
 		Locale locale = new Locale(idiomaSeleccionado.split("_")[0], idiomaSeleccionado.split("_")[1]);
 		ResourceBundle properties = ResourceBundle.getBundle("i18n/i18nmessages", locale);
-		
+
 		request.setAttribute("mensajeIdioma", properties.getString("menu.inicio"));
-		
+
 		// Guardamos el idioma seleccionado en la sesion
 		HttpSession sesion = request.getSession();
 		sesion.setAttribute("language", idiomaSeleccionado);
-		
-		if ( ruta != null ) {
+
+		if (ruta != null) {
 			request.getRequestDispatcher(ruta).forward(request, response);
-		}else {
+		} else {
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

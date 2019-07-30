@@ -54,9 +54,9 @@
 			</li>
 		</ul>
 		<div class="d-inline my-2 my-lg-0">
-			<a href="i18n?idiomaSeleccionado=es_ES&ruta=${pageContext.request.requestURI}"><img class="ml-2 ${sessionScope.idiomaSeleccionado != 'es_ES' ? 'inactive': ''  }" src="resources/images/españa.jpg" alt="Castellano"></a>
-			<a href="i18n?idiomaSeleccionado=en_EN&ruta=${pageContext.request.requestURI}"><img class="ml-2 ${sessionScope.idiomaSeleccionado != 'en_EN' ? 'inactive': ''  }" src="resources/images/england.jpg" alt="Inglés"></a>
-			<a href="i18n?idiomaSeleccionado=eu_ES&ruta=${pageContext.request.requestURI}"><img class="ml-2 ${sessionScope.idiomaSeleccionado != 'eu_ES' ? 'inactive': ''  }" src="resources/images/ikurrina.jpg" alt="Euskera"></a>
+			<a href="i18n?idiomaSeleccionado=es_ES&ruta=${pageContext.request.requestURI}"><img class="ml-2 ${sessionScope.language != 'es_ES' ? 'inactive': ''  }" src="resources/images/españa.jpg" alt="Castellano"></a>
+			<a href="i18n?idiomaSeleccionado=en_EN&ruta=${pageContext.request.requestURI}"><img class="ml-2 ${sessionScope.language != 'en_EN' ? 'inactive': ''  }" src="resources/images/england.jpg" alt="Inglés"></a>
+			<a href="i18n?idiomaSeleccionado=eu_ES&ruta=${pageContext.request.requestURI}"><img class="ml-2 ${sessionScope.language != 'eu_ES' ? 'inactive': ''  }" src="resources/images/ikurrina.jpg" alt="Euskera"></a>
 		</div>
 	</div>
 </nav> <!-- End NavBar -->
